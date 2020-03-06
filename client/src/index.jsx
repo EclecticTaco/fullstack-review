@@ -18,7 +18,7 @@ class App extends React.Component {
     $.ajax({
       method: "POST",
       url: "/repos",
-      data: {name: 'example', location: 'San Francisco'}
+      data: {term}
     })
       .done(function( msg ) {
         console.log('POST request sent and recieved by server')
