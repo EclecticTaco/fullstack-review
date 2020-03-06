@@ -13,7 +13,13 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   var handle = req.body.term
   console.log('input from client in app.post: ', handle)
-  gitHub.getReposByUsername(handle)
+  gitHub.getReposByUsername(handle, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('result from app.post: ',result)
+    }
+  })
   res.sendStatus(201)
   res.end('Server recieved POST')
 });
