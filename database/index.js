@@ -35,6 +35,7 @@ let save = (result, callback) => {
 }
 let pull = (callback) => {
   Repo.find()
+  .sort({forks: 'desc'})
   .limit(25)
   .then((result) => {
     callback(result)
