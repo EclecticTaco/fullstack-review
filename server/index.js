@@ -8,10 +8,6 @@ app.use(express.urlencoded())
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
   var handle = req.body.term
   console.log('input from client in app.post: ', handle)
   /* calls helpers/github.js */
@@ -19,14 +15,13 @@ app.post('/repos', function (req, res) {
     if (err) {
       console.log('error in github API query: ', err);
     } else {
-      // console.log('result from app.post: ',result)
       /* calls save func in database/index.js */
       DB.save(result, (err, resultFromCB) => {
         if (err) {
           console.log('error when posting to DB:', err);
-        } else {
+        } /* else {
           console.log('POSTED to DB: Server side no err');
-        }
+        } */
       })
     }
   })
@@ -35,8 +30,13 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  DB.pull((repoList) => {
+    console.log(repoList)
+  })
+
+  console.log('get request recieved by server')
+  res.sendStatus(201)
+  res.end('get requst works')
 });
 
 let port = 1128;
