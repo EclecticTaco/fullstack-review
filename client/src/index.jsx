@@ -30,7 +30,7 @@ class App extends React.Component {
         })
       }
     }
-    // console.log('POST request sent and recieved by server')
+
   );
 
   }
@@ -38,7 +38,9 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      {this.state.repos.map((obj) => {
+        return <RepoList repo={obj}/>
+      })}
       <Search onSearch={this.search}/>
     </div>)
   }
