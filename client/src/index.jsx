@@ -24,7 +24,8 @@ class App extends React.Component {
           method: "GET",
           url: "/repos",
           success: (result) => {
-            console.log(JSON.parse(result))
+            var results = JSON.parse(result);
+            this.setState({repos: results});
           }
         })
       }
