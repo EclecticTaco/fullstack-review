@@ -18,9 +18,9 @@ app.post('/repos', function (req, res) {
     if (err) {
       console.log(err)
     } else {
-      console.log('result from app.post: ',result)
+      // console.log('result from app.post: ',result)
       DB.save(result, (resultFromCB) => {
-        console.log('results from CB in save func in DB: ', resultFromCB)
+      /* console.log('results from CB in save func in DB: ', resultFromCB) */
       })
     }
   })

@@ -22,7 +22,36 @@ let repoSchema = new mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (result, callback) => {
-  console.log('result inside save passed form app.post: ', result)
+  // console.log('result inside save passed form app.post: ', result)
+  var uName;
+  var pPic;
+  var repName;
+  var repURL;
+  var fork;
+  var starTemp;
+  result.forEach((obj) => {
+    uName = obj.owner.login;
+    pPic = obj.owner.avatar_url;
+    repName = obj.name;
+    repURL = obj.html_url;
+    fork = obj.forks;
+    stars = obj.watchers_count;
+    var temp =  new Repo({
+      userName: uName,
+      profilePic: pPic,
+      repoName: repName,
+      repoURL: repURL,
+      forks: fork,
+      stars: starTemp
+    })
+    temp.save((err) => {
+      if (err) {
+        console.log('error in .save: ', err)
+      } else {
+        console.log('Saved to DB')
+      }
+    })
+  })
   callback(result)
   // TODO: Your code here
   // This function should save a repo or repos to
