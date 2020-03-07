@@ -12,6 +12,16 @@ class App extends React.Component {
     }
     this.search = this.search.bind(this);
   }
+  componentDidMount() {
+    $.ajax({
+      method: "GET",
+      url: "/repos",
+      success: (result) => {
+        var results = JSON.parse(result);
+        this.setState({repos: results});
+      }
+    })
+  }
 
   search (term) {
     console.log(`${term} was searched`);
