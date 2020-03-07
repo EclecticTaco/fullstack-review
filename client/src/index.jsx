@@ -18,16 +18,19 @@ class App extends React.Component {
     $.ajax({
       method: "POST",
       url: "/repos",
-      data: {term}
-    })
-      .done(function(msg) {
-        console.log('POST request sent and recieved by server')
+      data: {term},
+      success: () => {
         $.ajax({
           method: "GET",
           url: "/repos",
-          data: "GET REQUEST",
+          success: (result) => {
+            console.log(JSON.parse(result))
+          }
         })
-      });
+      }
+    }
+    // console.log('POST request sent and recieved by server')
+  );
 
   }
 

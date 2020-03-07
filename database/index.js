@@ -3,14 +3,12 @@ mongoose.connect('mongodb://localhost/fetcher');
 
 
 let repoSchema = new mongoose.Schema({
-  repo: {
     userName: String, // user name
     profilePic: String,  // URL to their profile pic
     repoName: String, // string of their repo name
     repoURL: String, // ULR string link to their repo
     forks: Number, // number of times their repo has been forked
     stars: Number, // number of times their repo has been stared
-  }
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
@@ -36,9 +34,9 @@ let save = (result, callback) => {
 
 }
 let pull = (callback) => {
-  Repo.find().
-  limit(25).
-  then((result) => {
+  Repo.find()
+  .limit(25)
+  .then((result) => {
     callback(result)
   })
 }

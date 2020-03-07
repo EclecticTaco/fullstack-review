@@ -31,12 +31,9 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   DB.pull((repoList) => {
-    console.log(repoList)
+    res.end(JSON.stringify(repoList))
   })
 
-  console.log('get request recieved by server')
-  res.sendStatus(201)
-  res.end('get requst works')
 });
 
 let port = 1128;
