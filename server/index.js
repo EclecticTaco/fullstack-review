@@ -14,18 +14,24 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   var handle = req.body.term
   console.log('input from client in app.post: ', handle)
+  /* calls helpers/github.js */
   gitHub.getReposByUsername(handle, (err, result) => {
     if (err) {
-      console.log(err)
+      console.log('error in github API query: ', err);
     } else {
       // console.log('result from app.post: ',result)
-      DB.save(result, (resultFromCB) => {
-      /* console.log('results from CB in save func in DB: ', resultFromCB) */
+      /* calls save func in database/index.js */
+      DB.save(result, (err, resultFromCB) => {
+        if (err) {
+          console.log('error when posting to DB:', err);
+        } else {
+          console.log('POSTED to DB: Server side no err');
+        }
       })
     }
   })
-  res.sendStatus(201)
-  res.end('Server recieved POST')
+  res.sendStatus(201);
+  res.end('Server recieved POST');
 });
 
 app.get('/repos', function (req, res) {
