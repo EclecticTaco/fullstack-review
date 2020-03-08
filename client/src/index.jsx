@@ -12,14 +12,14 @@ class App extends React.Component {
     }
     this.search = this.search.bind(this);
   }
+
   componentDidMount() {
-    $.ajax({
-      method: "GET",
-      url: "/repos",
-      success: (result) => {
-        var results = JSON.parse(result);
-        this.setState({repos: results});
-      }
+    fetch("/repos")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.setState({repos: data})
     })
   }
 
@@ -35,9 +35,7 @@ class App extends React.Component {
           url: "/repos",
           success: (result) => {
             var results = JSON.parse(result);
-            console.log(results)
             this.setState({repos: results});
-            console.log('in success cb: ', this.state.repos)
           }
         })
       }
