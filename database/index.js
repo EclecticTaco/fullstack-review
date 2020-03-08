@@ -13,8 +13,9 @@ let repoSchema = new mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
+
 let save = (result, callback) => {
-  result.forEach((obj) => {
+  var results =result.map((obj) => {
     var temp =  new Repo({
       userName: obj.owner.login,
       profilePic: obj.owner.avatar_url,
@@ -23,16 +24,13 @@ let save = (result, callback) => {
       forks: obj.forks,
       stars: obj.watchers_count
     })
-    temp.save((err, cb) => {
-      if (err) {
-        callback(err, result);
-      } else {
-        callback(null, result);
-      }
-    })
+    return temp.save()
   })
-
+  Promise.all(results).then((value) => {
+    callback(value)
+  })
 }
+
 let pull = (callback) => {
   Repo.find()
   .sort({forks: 'desc'})

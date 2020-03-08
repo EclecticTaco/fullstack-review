@@ -23,6 +23,14 @@ let getReposByUsername = (userName, callback) => {
 
 }
 
+//default is GET
+// fetch('thisIsTheURL.com/')
+  //.then((response) => {
+    // return response.json();
+  // })
+  //.then((data) => {
+    // console.log(data)
+  // })
 
 /* https://api.github.com/users/ */
 /* curl -u username:token https://api.github.com/user */ // ??

@@ -19,14 +19,12 @@ app.post('/repos', function (req, res) {
       DB.save(result, (err, resultFromCB) => {
         if (err) {
           console.log('error when posting to DB:', err);
-        } /* else {
-          console.log('POSTED to DB: Server side no err');
-        } */
+        }
+        res.sendStatus(201);
+        res.end('Server recieved POST');
       })
     }
   })
-  res.sendStatus(201);
-  res.end('Server recieved POST');
 });
 
 app.get('/repos', function (req, res) {

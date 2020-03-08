@@ -35,7 +35,9 @@ class App extends React.Component {
           url: "/repos",
           success: (result) => {
             var results = JSON.parse(result);
+            console.log(results)
             this.setState({repos: results});
+            console.log('in success cb: ', this.state.repos)
           }
         })
       }
@@ -48,10 +50,10 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
+      <Search onSearch={this.search}/>
       {this.state.repos.map((obj) => {
         return <RepoList repo={obj}/>
       })}
-      <Search onSearch={this.search}/>
     </div>)
   }
 }
